@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Register - Commerce{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="card-title font-weight-bold mb-3">Register</h2>
+                    <p class="text-muted mb-4">Create an account to start bidding and creating listings.</p>
+
+                    {% if message %}
+                        <div class="alert alert-danger" role="alert">{{ message }}</div>
+                    {% endif %}
+
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Username</label>
+                            <input class="form-control" autofocus type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Email Address</label>
+                            <input class="form-control" type="email" name="email" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="font-weight-bold">Confirm Password</label>
+                            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
+                        </div>
+                        <button class="btn btn-warning btn-block font-weight-bold py-2 mb-3 text-dark" type="submit">Create Account</button>
+                    </form>
+
+                    <div class="text-center text-muted small">
+                        Already have an account? <a href="{% url 'login' %}" class="font-weight-bold">Log In here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Create Listing - Commerce{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="card-title font-weight-bold mb-3">Create a New Listing</h2>
+                    <p class="text-muted mb-4">Provide details about your item to start the auction.</p>
+
+                    <form action="{% url 'create_listing' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group mb-3">
+                            <label for="{{ form.title.id_for_label }}" class="font-weight-bold">
+                                Title <span class="text-danger">*</span>
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger small mt-1">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="font-weight-bold">
+                                Description <span class="text-danger">*</span>
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger small mt-1">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="{{ form.starting_bid.id_for_label }}" class="font-weight-bold">
+                                Starting Bid ($) <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                {{ form.starting_bid }}
+                            </div>
+                            {% if form.starting_bid.errors %}
+                                <div class="text-danger small mt-1">{{ form.starting_bid.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="{{ form.image_url.id_for_label }}" class="font-weight-bold">
+                                Image URL <span class="text-muted font-weight-normal">(optional)</span>
+                            </label>
+                            {{ form.image_url }}
+                            <small class="form-text text-muted">Provide a direct link to an image of your item.</small>
+                            {% if form.image_url.errors %}
+                                <div class="text-danger small mt-1">{{ form.image_url.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="{{ form.category.id_for_label }}" class="font-weight-bold">
+                                Category <span class="text-muted font-weight-normal">(optional)</span>
+                            </label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <div class="text-danger small mt-1">{{ form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'index' %}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4 font-weight-bold">Publish Listing</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

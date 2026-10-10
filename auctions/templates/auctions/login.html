@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Log In - Commerce{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="card-title font-weight-bold mb-3">Log In</h2>
+                    <p class="text-muted mb-4">Enter your credentials to access your account.</p>
+
+                    {% if message %}
+                        <div class="alert alert-danger" role="alert">{{ message }}</div>
+                    {% endif %}
+
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{ request.GET.next }}">
+                        {% endif %}
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Username</label>
+                            <input autofocus class="form-control" type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="font-weight-bold">Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <button class="btn btn-primary btn-block font-weight-bold py-2 mb-3" type="submit">Log In</button>
+                    </form>
+
+                    <div class="text-center text-muted small">
+                        Don't have an account? <a href="{% url 'register' %}" class="font-weight-bold">Register here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
